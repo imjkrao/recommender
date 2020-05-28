@@ -6,6 +6,8 @@ Created on Mon May  4 11:58:23 2020
 """
 
 #input_path='E:/Thesis/recommender/user_job_profile/'
+
+#print(rows)
 def recommend_job(input_path,user_id,flag=0):
         import pandas as pd
         import numpy as np
@@ -23,15 +25,12 @@ def recommend_job(input_path,user_id,flag=0):
                 else:
                     return ans
         def Jacardi(arr1,arr2):
-            try:
-                intscore= sum([(a*b) for a, b in zip(arr1, arr2)])
-                ans=intscore/sum(arr1)
-                if(ans>1):
-                    return 1.0
-                else:
+            ans=jk_similarity.jk_similarity(arr1,arr2)
+            if(np.isnan(ans)):
+                    return 0
+            else:
                     return ans
-            except ZeroDivisionError:
-                return 1.0
+            
 
         
         #Check if user id exists
@@ -181,10 +180,10 @@ def recommend_job(input_path,user_id,flag=0):
             user_database=userdatabases
         matches=sorted(matches.items(),key=lambda x:x[1],reverse=True)
         
-        recommendations=matches[:615]
+        recommendations=matches[:10]
         
         #print("recommendations are")
-        print(recommendations)
+        #print(recommendations)
         rows=pd.DataFrame(columns=df2.columns)
         title= []
         score= []
@@ -196,5 +195,5 @@ def recommend_job(input_path,user_id,flag=0):
             rows=rows.append(row)
         return rows,matches
 
-rows,matches=recommend_job('E:/Thesis/recommender/user_job_profile/',6)
-#print(rows)
+rows,matches=recommend_job('E:/Thesis/recommender/user_job_profile/',7)
+print(rows)

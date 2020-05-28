@@ -79,8 +79,8 @@ def recommend_job(input_path,user_id,flag=0):
         platform=np.asarray(platform)
         database=np.asarray(database)
         #print(len(domain),len(userdomain))
-        #score=(0.4*cosine_similarity(domain,userdomain))+(0.6*(cosine_similarity(language,userlanguages)+cosine_similarity(framework,userframeworks)+cosine_similarity(platform,userplatforms)+cosine_similarity(database,userdatabases)))
-        score=(0.4*Jacardi(domain,userdomain))+(0.6*(Jacardi(language,userlanguages)+Jacardi(framework,userframeworks)+Jacardi(platform,userplatforms)+Jacardi(database,userdatabases)))
+        score=(0.4*cosine_similarity(domain,userdomain))+(0.6*(cosine_similarity(language,userlanguages)+cosine_similarity(framework,userframeworks)+cosine_similarity(platform,userplatforms)+cosine_similarity(database,userdatabases)))
+        #score=(0.4*Jacardi(domain,userdomain))+(0.6*(Jacardi(language,userlanguages)+Jacardi(framework,userframeworks)+Jacardi(platform,userplatforms)+Jacardi(database,userdatabases)))
         matches[job_id]=score
         #score=(0.7*cosine_similarity(domain,userdomain))+(0.3*(cosine_similarity(language,userlanguages)+cosine_similarity(framework,userframeworks)+cosine_similarity(platform,userplatforms)+cosine_similarity(database,userdatabases)))
     matches=sorted(matches.items(),key=lambda x:x[1],reverse=True)

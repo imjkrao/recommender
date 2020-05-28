@@ -9,30 +9,33 @@ Created on Thu May  7 22:35:55 2020
 #Load file related to User domain 
 
 #Load row of user_ID related to all the Job domain  
-def score_plot(matches):
+def score_plot(matches,v):
     import chart_studio.plotly as py
     import plotly.graph_objs as go
     import plotly .offline as offline
     import plotly.express as px
-    matches=[lis for lis in matches if lis[1]!=0.0]
-    total_recommendation=len(matches)
+    match=[lis for lis in matches if lis[1]!=0.0]
+    total_recommendation=len(match)
+    print(total_recommendation)
     #select top 60%
-    thres=round(max(score)*.4,2)
-    score=[lis[1] for lis in matches if lis[1]>thres]
-    TP=len(score)
+    score=[lis[1] for lis in matches if lis[1]]
+    thres=round(max(score)*v,2)
+    score_thres=[lis[1] for lis in matches if lis[1]>thres]
+    TP=len(score_thres)
     TN=615-total_recommendation
     FP=total_recommendation-TP
+    print(TP,TN,FP)
     title=[lis[0] for lis in matches if lis[1]>thres]
-    plt.plot(title,score, color='g')
-    plt.xlabel('Title')
-    plt.ylabel('Score')
-    plt.title('Accuracy')
-    plt.show()
+    # plt.plot(title,score, color='g')
+    # plt.xlabel('Title')
+    # plt.ylabel('Score')
+    # plt.title('Accuracy')
+    # plt.show()
     data = [go.Line(x=title, y=score)]
     layout = go.Layout(title = 'Accuracy', width = 700, height = 700, xaxis_type = 'category')
     fig = go.Figure(data=data, layout=layout)
-    offline.plot(fig,filename='Accuracy.html')
+    #offline.plot(fig,filename='Accuracy.html')
     precision= (TP/(TP+FP))
     recall=(TP/TP)
     F1= 2*((precision*recall)/(precision+recall))
-    return plt.show(), precision, recall, F1                                                    
+    return print(precision, recall, F1)                                                    
