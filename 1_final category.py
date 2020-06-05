@@ -15,6 +15,11 @@ df2=pd.read_csv(link, encoding='unicode_escape')
 training_range=int(len(df2.loc[:,'Job_Id']))
 
 def categorize_jobs(df2,training_range):
+        def check_threshold(threshold,ele):
+            if(ele[0]!=threshold[0][0] and abs(ele[1]-threshold[0][1])<0.03):
+                return True
+            else:
+                return False
         #Compare similarities of word embeddings using Word2vec and cosine similarity
         nlp=en_core_web_lg.load()
         job_id=df2.loc[:,'Job_Id'].tolist()[:training_range]

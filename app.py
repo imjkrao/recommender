@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May  5 15:56:30 2020
-
-@author: jeevan
-"""
-
-# -*- coding: utf-8 -*-
-"""
 Created on Mon May  4 19:04:50 2020
 
 @author: jeevan
